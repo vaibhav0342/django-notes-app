@@ -19,12 +19,13 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWD}}
       run: docker login -u ${DOCKER_USERNAME} -p  ${DOCKER_PASSWORD}
      
+    - name: Build the Docker image
+      run: docker build -t ${{secrets.DOCKER_NAME}}/notes-app:latest .
+
     - name: Tag the Docker image with a unique tag
-      run: docker tag vaibhav0342/notes-app:latest vaibhav0342/notes-app:$(date +%s)
+      run: docker tag ${{secrets.DOCKER_NAME}}/notes-app:latest ${{secrets.DOCKER_NAME}}/notes-app:$(date +%s)
 
-  
-    - name: Push the Docker image with the unique tag
-      run: docker push vaibhav0342/notes-app:$(date +%s)
-
+    - name: Push the Docker image
+      run: docker push ${{secrets.DOCKER_NAME}}/notes-app:$(date +%s)
       
       
