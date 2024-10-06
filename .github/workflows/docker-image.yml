@@ -17,7 +17,7 @@ jobs:
       env:
         DOCKER_USERNAME: ${{secrets.DOCKER_NAME}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWD}}
-      run: docker login -u "${DOCKER_USERNAME}" --password-stdin "${DOCKER_PASSWORD}"
+      run: docker login -u ${DOCKER_USERNAME} -p  ${DOCKER_PASSWORD}
      
     - name: Tag the Docker image with a unique tag
       run: docker tag vaibhav0342/notes-app:latest vaibhav0342/notes-app:$(date +%s)
