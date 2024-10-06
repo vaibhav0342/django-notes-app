@@ -15,12 +15,12 @@ jobs:
 
     - name: login to dockerhub 
       env: 
-        DOCKER_NAME: ${{secret.DOCKER_NAME}}
-        DOCKER_PASSWD: ${{secret.DOCKER_PASSWD}}
+        DOCKER_NAME: ${{secrets.DOCKER_NAME}}
+        DOCKER_PASSWD: ${{secrets.DOCKER_PASSWD}}
       run: docker login -u $DOCKER_NAME  -P $DOCKER_PASSWD 
      
     - name: Build the Docker image 
-      run: docker build -t vaibhav0342/note-app .
+      run: docker build -t vaibhav0342/notes-app .
 
     - name: push the Docker image 
       run: docker push vaibhav0342/note-app:$(date +%s) 
