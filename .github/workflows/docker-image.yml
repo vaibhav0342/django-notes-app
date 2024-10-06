@@ -17,13 +17,12 @@ jobs:
       env: 
         DOCKER_NAME: ${{secret.DOCKER_NAME}}
         DOCKER_PASSWD: ${{secret.DOCKER_PASSWD}}
-     run: docker login -u $DOCKER_NAME  -P $DOCKER_PASSWD 
+      run: docker login -u $DOCKER_NAME  -P $DOCKER_PASSWD 
      
-  
     - name: Build the Docker image 
       run: docker build -t vaibhav0342/note-app .
 
-       - name: push the Docker image 
+    - name: push the Docker image 
       run: docker push vaibhav0342/note-app:$(date +%s) 
 
 
