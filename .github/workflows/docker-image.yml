@@ -14,17 +14,17 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: login to dockerhub 
-      env: 
-        DOCKER_NAME: ${{secrets.DOCKER_NAME}}
-        DOCKER_PASSWD: ${{secrets.DOCKER_PASSWD}}
-      run: docker login -U $DOCKER_NAME  -P $DOCKER_PASSWD 
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_NAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWD}}
+      run: docker login -u "${DOCKER_USERNAME}" --password-stdin "${DOCKER_PASSWORD}"
      
-    - name: Build the Docker image 
-      run: docker build -t vaibhav0342/notes-app .
+    - name: Tag the Docker image with a unique tag
+      run: docker tag vaibhav0342/notes-app:latest vaibhav0342/notes-app:$(date +%s)
 
-    - name: push the Docker image 
-      run: docker push vaibhav0342/note-app:$(date +%s) 
-
+  
+    - name: Push the Docker image with the unique tag
+      run: docker push vaibhav0342/notes-app:$(date +%s)
 
       
       
